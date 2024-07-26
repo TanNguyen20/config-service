@@ -1,0 +1,13 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:https://compatible-finch-tannguyen-14536f90.koyeb.app//eureka}
+management:
+  tracing:
+    sampling:
+      probability: 1.0

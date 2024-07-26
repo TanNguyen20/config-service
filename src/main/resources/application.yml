@@ -1,7 +1,9 @@
 server:
-  port: 9296
+  port: 8080
 
 spring:
+  profiles:
+    active: native
   application:
     name: config-service
   cloud:
@@ -15,6 +17,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_SERVER_ADDRESS:https://compatible-finch-tannguyen-14536f90.koyeb.app//eureka}
   instance:
     preferIpAddress: true
