@@ -13,4 +13,4 @@ management:
       probability: 1.0
   zipkin:
     tracing:
-      endpoint: https://zipkin-am0u.onrender.com/zipkin/api/v2/spans
+      endpoint: https://zipkin-am0u.onrender.com/api/v2/spans
