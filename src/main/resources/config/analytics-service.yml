@@ -17,3 +17,10 @@ management:
   zipkin:
     tracing:
       endpoint: https://zipkin-am0u.onrender.com/api/v2/spans
+springdoc:
+  packagesToScan: vn.tannguyen.analytics_service
+  cache:
+    disabled: true
+  version: '@springdoc.version@'
+  api-docs:
+    version: openapi_3_1
