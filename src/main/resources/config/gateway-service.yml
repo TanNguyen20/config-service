@@ -40,12 +40,12 @@ spring:
                 args:
                   name: ANALYTICS-SERVICE
                   fallbackUri: forward:/analyticsServiceFallback
-          - id: openapi
-            uri: http://localhost:${server.port}
-            predicates:
-              - Path=/v3/api-docs/**
-            filters:
-              - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+          # - id: openapi
+          #   uri: http://localhost:${server.port}
+          #   predicates:
+          #     - Path=/v3/api-docs/**
+          #   filters:
+          #     - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
 springdoc:
   cache:
     disabled: true
