@@ -22,24 +22,36 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: DATA-SERVICE
-            uri: lb://DATA-SERVICE
+          # - id: DATA-SERVICE
+          #   uri: lb://DATA-SERVICE
+          #   predicates:
+          #     - Path=/data-service/**
+          #   filters:
+          #     - name: CircuitBreaker
+          #       args:
+          #         name: DATA-SERVICE
+          #         fallbackUri: forward:/dataServiceFallback
+          # - id: ANALYTICS-SERVICE
+          #   uri: lb://ANALYTICS-SERVICE
+          #   predicates:
+          #     - Path=/analytics-service/**
+          #   filters:
+          #     - name: CircuitBreaker
+          #       args:
+          #         name: ANALYTICS-SERVICE
+          #         fallbackUri: forward:/analyticsServiceFallback
+          - id: data-service
+            uri: lb://data-service
             predicates:
-              - Path=/data-service/**
+            - Path=/data/**
             filters:
-              - name: CircuitBreaker
-                args:
-                  name: DATA-SERVICE
-                  fallbackUri: forward:/dataServiceFallback
-          - id: ANALYTICS-SERVICE
-            uri: lb://ANALYTICS-SERVICE
+            - RewritePath=/data/(?<path>.*), /$\{path}
+          - id: analytics-service
+            uri: lb://analytics-service
             predicates:
-              - Path=/analytics-service/**
+            - Path=/analytics/**
             filters:
-              - name: CircuitBreaker
-                args:
-                  name: ANALYTICS-SERVICE
-                  fallbackUri: forward:/analyticsServiceFallback
+            - RewritePath=/analytics/(?<path>.*), /$\{path}
           # - id: openapi
           #   uri: http://localhost:${server.port}
           #   predicates:
