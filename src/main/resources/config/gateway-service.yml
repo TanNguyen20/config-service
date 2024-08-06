@@ -22,35 +22,41 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: DATA-SERVICE
-            uri: lb://DATA-SERVICE
+          - id: analytics-service
+            uri: lb://analytics-service
             predicates:
-              - Path=/data-service/**
+              - Path=/analytics/**
             filters:
-              - name: CircuitBreaker
-                args:
-                  name: DATA-SERVICE
-                  fallbackUri: forward:/dataServiceFallback
-          - id: ANALYTICS-SERVICE
-            uri: lb://ANALYTICS-SERVICE
+              - RewritePath=/analytics/(?<path>.*), /$\{path}
+#              - name: CircuitBreaker
+#                args:
+#                  name: analytics-service
+#                  id: analytics-service
+#                  fallbackUri: forward:/analyticsServiceFallback
+          - id: data-service
+            uri: lb://data-service
             predicates:
-              - Path=/analytics-service/**
+              - Path=/data/**
             filters:
-              - name: CircuitBreaker
-                args:
-                  name: ANALYTICS-SERVICE
-                  fallbackUri: forward:/analyticsServiceFallback
+              - RewritePath=/data/(?<path>.*), /$\{path}
+#              - name: CircuitBreaker
+#                args:
+#                  name: data-service
+#                  id: data-service
+#                  fallbackUri: forward:/dataServiceFallback
           - id: openapi
-            uri: http://localhost:${server.port}
+            uri: https://tannguyen-gateway-service.azurewebsites.net
             predicates:
-              - Path=/v3/api-docs/**
+              - Path=/v3/api-docs/data,/v3/api-docs/analytics
             filters:
               - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
 springdoc:
   cache:
     disabled: true
   version: '@springdoc.version@'
   swagger-ui:
+    enabled: true
     use-root-path: true
   api-docs:
     version: openapi_3_1
