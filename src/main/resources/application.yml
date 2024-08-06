@@ -13,3 +13,5 @@ eureka:
       defaultZone: ${EUREKA_SERVER_ADDRESS:https://compatible-finch-tannguyen-14536f90.koyeb.app//eureka}
   instance:
     preferIpAddress: true
+
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
