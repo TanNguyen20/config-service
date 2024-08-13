@@ -23,7 +23,7 @@ spring:
       mvc:
         routes:
           - id: analytics-service
-            uri: lb://analytics-service
+            uri: https://analytics-service-3l31.onrender.com
             predicates:
               - Path=/analytics/**
             filters:
@@ -34,7 +34,7 @@ spring:
 #                  id: analytics-service
 #                  fallbackUri: forward:/analyticsServiceFallback
           - id: data-service
-            uri: lb://data-service
+            uri: https://student-management-aezv.onrender.com
             predicates:
               - Path=/data/**
             filters:
@@ -45,7 +45,7 @@ spring:
 #                  id: data-service
 #                  fallbackUri: forward:/dataServiceFallback
           - id: openapi
-            uri: https://tannguyen-gateway-service.azurewebsites.net
+            uri: https://gateway-service-xp68.onrender.com
             predicates:
               - Path=/v3/api-docs/data,/v3/api-docs/analytics
             filters:
